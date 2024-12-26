@@ -1,0 +1,15 @@
+**/target/
+# Maven
+log/
+target/
+*.txt
+
+# Inclusions
+!lib/**
+
+# Compiled Files
+*.class
+bin/
+build/
+/bin1/
+java/build/**

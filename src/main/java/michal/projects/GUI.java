@@ -13,6 +13,7 @@ import javafx.stage.Stage;
 public class GUI 
 {
     Random random;
+    @SuppressWarnings("exports")
     public GUI(Stage stage)
     {
         random = new Random();

@@ -1,4 +1,4 @@
-package michal.projects;
+package michal.projects.loggers;
 
 import java.io.IOException;
 import java.util.logging.*;
@@ -10,7 +10,6 @@ public class MyLogger
         throw new InstantiationError("MyLogger is a full statc class");
     }
 
-    @SuppressWarnings("exports")
     public static final Logger logger = Logger.getGlobal();
     public static void loggerConfig()
     {

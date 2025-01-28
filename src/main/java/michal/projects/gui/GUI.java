@@ -1,4 +1,4 @@
-package michal.projects;
+package michal.projects.gui;
 
 import java.util.Random;
 
@@ -12,8 +12,8 @@ import javafx.stage.Stage;
 
 public class GUI 
 {
-    Random random;
-    @SuppressWarnings("exports")
+    private Random random;
+
     public GUI(Stage stage)
     {
         random = new Random();
@@ -34,9 +34,6 @@ public class GUI
         inputBox.getChildren().add(generateButton);
         Scene scene = new Scene(root, 600, 400);
 
-        
-        
-        
         stage.setScene(scene);
         stage.setTitle("Dyskoteka");
         stage.show();

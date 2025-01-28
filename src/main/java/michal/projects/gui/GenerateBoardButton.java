@@ -1,4 +1,4 @@
-package michal.projects;
+package michal.projects.gui;
 
 import java.util.Random;
 import java.util.logging.Level;
@@ -11,15 +11,17 @@ import javafx.scene.control.TextField;
 import javafx.scene.layout.VBox;
 import javafx.scene.shape.Rectangle;
 import javafx.stage.Screen;
+import michal.projects.board_elements.Board;
+import michal.projects.board_elements.Tile;
+import michal.projects.loggers.MyLogger;
+import michal.projects.utils.MyAlerts;
+import michal.projects.utils.Utils;
 
-public class GenerateBoardButton extends Button
-{
-    public GenerateBoardButton(String name, TextField speedField,TextField pField, TextField mField, TextField nField, VBox root, Random random)
-    {
+public class GenerateBoardButton extends Button {
+    public GenerateBoardButton(String name, TextField speedField, TextField pField, TextField mField, TextField nField, VBox root, Random random) {
         super(name);
         setOnAction(event -> {
-            try 
-            {
+            try {
                 int m = Integer.parseInt(mField.getText());
                 int n = Integer.parseInt(nField.getText());
                 double propability = Double.parseDouble(pField.getText());
@@ -30,17 +32,14 @@ public class GenerateBoardButton extends Button
                 double width = primaryScreenBounds.getWidth()/(double)m;
                 double height = (primaryScreenBounds.getHeight()-100)/(double)n;
 
-                if (m <= 0 || n <= 0) 
-                {
+                if (m <= 0 || n <= 0) {
                     MyLogger.logger.log(Level.WARNING, "invalid input");
                     MyAlerts.displayErrorAlert("invalid input");
                     throw new NumberFormatException("invalid input");
                 }
 
-                for(Node node : root.getChildren())
-                {
-                    if(node instanceof Board)
-                    {
+                for (Node node : root.getChildren()) {
+                    if (node instanceof Board) {
                         Board parent = (Board)node;
                         parent.stopAllTiles();
                         Platform.runLater(()->parent.getChildren().clear());
@@ -63,10 +62,8 @@ public class GenerateBoardButton extends Button
                 }
                 root.getChildren().add(board);
 
-                for(int i = 0; i< m; i++)
-                {
-                    for(int j = 0; j<n; j++)
-                    {
+                for (int i = 0; i< m; i++) {
+                    for (int j = 0; j<n; j++) {
                         Thread thread = new Thread(board.getTile(i, j));
                         thread.setDaemon(true);
                         thread.start();

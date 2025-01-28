@@ -1,26 +1,32 @@
-package michal.projects;
+package michal.projects.board_elements;
 
 import java.util.logging.Level;
 import javafx.scene.layout.GridPane;
+import michal.projects.loggers.MyLogger;
 
-public class Board extends GridPane 
-{
+public class Board extends GridPane {
+    /**array of tiles representing the board. */
     private Tile tiles[][];
 
     private final int numOfColumns;
     private final int numOfRows;
 
     private final double probability;
-    public final double getProbability(){return probability;}
+    public final double getProbability() {
+        return probability;
+    }
 
     private final int speed;
-    public final int getSpeed(){return speed;}
+    public final int getSpeed() {
+        return speed;
+    }
 
     private final Object paintLock = new Object();
-    public final Object getLock(){return paintLock;}
+    public final Object getLock(){
+        return paintLock;
+    }
 
-    public Board(int numOfColumns, int numOfRows, double propability, int speed)
-    {
+    public Board(int numOfColumns, int numOfRows, double propability, int speed) {
         super();
         this.probability = propability;
         this.speed = speed;
@@ -30,13 +36,12 @@ public class Board extends GridPane
     }
 
     /**
-     * @brief Gets the tile at specified coordinates.
+     * Gets the tile at specified coordinates.
      * @param x X-coordinate of the tile.
      * @param y Y-coordinate of the tile.
      * @return The Tile object at the specified coordinates.
      */
-    public Tile getTile(int x, int y)
-    {
+    public Tile getTile(int x, int y) {
         if(x == -1)  
             x = numOfColumns - 1;
         if(x == numOfColumns)
@@ -50,21 +55,19 @@ public class Board extends GridPane
     }
 
      /**
-     * @brief Sets a tile at specified coordinates.
+     * Sets a tile at specified coordinates.
      * @param x X-coordinate of the tile.
      * @param y Y-coordinate of the tile.
      * @param tile The Tile object to set at the specified coordinates.
      */
-    public void setTile(int x, int y, Tile tile)
-    {
+    public void setTile(int x, int y, Tile tile) {
         tiles[x][y] = tile;
     }
 
      /**
-     * @brief Stops all tile threads in the board.
+     * Stops all tile threads in the board.
      */
-    public void stopAllTiles()
-    {
+    public void stopAllTiles() {
         for(int i = 0; i<numOfColumns; i++)
             for(int j = 0; j<numOfRows; j++)
                 tiles[i][j].stopThread();
